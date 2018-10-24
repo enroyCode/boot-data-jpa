@@ -21,8 +21,8 @@ import org.springframework.dao.annotation.PersistenceExceptionTranslationPostPro
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-@Order(Ordered.HIGHEST_PRECEDENCE)//定义组件的加载顺序，这里为最高级
 @Configuration//表明这是一个配置类
+@Order(Ordered.HIGHEST_PRECEDENCE)//定义组件的加载顺序，这里为最高级
 @EnableTransactionManagement(proxyTargetClass = true)//启用JPA的事物管理
 @EnableJpaRepositories(basePackages = "com.enroy.cloud.boot.data.jpa.repository")//启动JPA资源库并设置接口资源库的位置
 public class JpaConfiguration {
