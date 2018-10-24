@@ -16,6 +16,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -49,6 +50,12 @@ public class UserController {
   @RequestMapping(value = "/get/code", method = RequestMethod.GET)
   public User getByCode(@ApiParam("用户代码") @RequestParam("code") String code) {
     return userService.getByCode(code);
+  }
+
+  @ApiOperation("根据key查询员工")
+  @RequestMapping(value = "/query", method = RequestMethod.POST)
+  public Page<User> query(@ApiParam("用户代码") @RequestParam("key") String key, @RequestParam("page") int page, @RequestParam("pageSize") int pageSize) {
+    return userService.query(key, page, pageSize);
   }
 
 }

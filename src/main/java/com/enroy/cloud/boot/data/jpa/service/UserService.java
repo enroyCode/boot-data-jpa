@@ -14,6 +14,9 @@ import com.enroy.cloud.boot.data.jpa.common.ActionResult;
 import com.enroy.cloud.boot.data.jpa.dao.UserDao;
 import com.enroy.cloud.boot.data.jpa.transactional.DataJpaNewTx;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -43,4 +46,8 @@ public class UserService {
     return userDao.findByCode(code);
   }
 
+  public Page<User> query(String key, int page, int pageSize) {
+    Pageable pageable = new PageRequest(page, pageSize);
+    return userDao.query(key, pageable);
+  }
 }

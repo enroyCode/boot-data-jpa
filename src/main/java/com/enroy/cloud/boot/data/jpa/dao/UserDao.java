@@ -15,6 +15,8 @@ import com.enroy.cloud.boot.data.jpa.repository.UserRepository;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.EntityManager;
@@ -47,6 +49,10 @@ public class UserDao {
 
   public User findByCode(String code) {
     return userRepository.findByCode(code);
+  }
+
+  public Page<User> query(String key, Pageable pageable) {
+    return userRepository.query(key, pageable);
   }
 
 }

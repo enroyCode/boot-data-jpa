@@ -10,6 +10,8 @@
 package com.enroy.cloud.boot.data.jpa.repository;
 
 import com.enroy.cloud.boot.data.jpa.api.User;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.Repository;
@@ -30,4 +32,7 @@ public interface UserRepository extends Repository<User, String> {
 
   @Query("select p from User p where p.code= :code")
   User findByCode(@Param("code") String code);
+
+  @Query("select p from User p where p.code= :keyword or p.name=:keyword")
+  Page<User> query(@Param("keyword") String keyword, Pageable pageable);
 }
