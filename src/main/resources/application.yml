@@ -1,0 +1,42 @@
+server:
+  port: 5030
+  servlet:
+    application-display-name: boot-data-jpa
+
+
+spring:
+  profiles:
+    active: dev
+  application:
+    name: ${server.servlet.application-display-name}
+  security:
+    user:
+      name: guest
+      password: guest
+  datasource:
+    url: jdbc:mysql://localhost:3306/jpatest
+    username: root
+    password: 123456
+  jpa:
+    generate-ddl: true
+    database: mysql
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+
+#management:
+#  security:
+#    enabled: false
+
+
+
+#日志
+logging:
+  level:
+    root: INFO
+  file: /apache-tomcat/logs/spms-scm-transfer.log
+  pattern:
+    file: '%d [%thread] [%X{trace_id:--}] %-5level %logger - %msg%n'
+    console: '%d [%thread] [%X{trace_id:--}] %-5level %logger - %msg%n'
+
