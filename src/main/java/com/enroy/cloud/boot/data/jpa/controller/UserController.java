@@ -44,4 +44,11 @@ public class UserController {
   public ActionResult rename(@ApiParam("用户代码") @RequestParam("code") String code, @ApiParam("修改名称") @RequestParam("name") String name) {
     return userService.rename(code, name);
   }
+
+  @ApiOperation("获取指定员工")
+  @RequestMapping(value = "/get/code", method = RequestMethod.GET)
+  public User getByCode(@ApiParam("用户代码") @RequestParam("code") String code) {
+    return userService.getByCode(code);
+  }
+
 }

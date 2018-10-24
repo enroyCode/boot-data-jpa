@@ -39,4 +39,8 @@ public class UserService {
     return userDao.rename(user.getUuid(), name);
   }
 
+  public User getByCode(String code) {
+    return userDao.findByCode(code);
+  }
+
 }
