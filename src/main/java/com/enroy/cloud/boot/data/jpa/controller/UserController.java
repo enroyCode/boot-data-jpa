@@ -10,12 +10,15 @@
 package com.enroy.cloud.boot.data.jpa.controller;
 
 import com.enroy.cloud.boot.data.jpa.api.User;
+import com.enroy.cloud.boot.data.jpa.common.ActionResult;
 import com.enroy.cloud.boot.data.jpa.service.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -34,5 +37,11 @@ public class UserController {
   @RequestMapping(value = "/gets", method = RequestMethod.GET)
   public List<User> gets() {
     return userService.findAll();
+  }
+
+  @ApiOperation("修改员工姓名")
+  @RequestMapping(value = "/rename", method = RequestMethod.POST)
+  public ActionResult rename(@ApiParam("用户代码") @RequestParam("code") String code, @ApiParam("修改名称") @RequestParam("name") String name) {
+    return userService.rename(code, name);
   }
 }

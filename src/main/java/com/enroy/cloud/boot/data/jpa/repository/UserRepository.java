@@ -11,7 +11,9 @@ package com.enroy.cloud.boot.data.jpa.repository;
 
 import com.enroy.cloud.boot.data.jpa.api.User;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
@@ -21,4 +23,11 @@ import java.util.List;
 public interface UserRepository extends JpaRepository<User, String> {
   @Query("select p from User p")
   List<User> findAll();
+
+  @Modifying
+  @Query("update User p set p.name = :name where p.uuid = :uuid")
+  int rename(@Param("uuid") String uuid, @Param("name") String name);
+
+  @Query("select p from User p where p.code= :code")
+  User findByCode(@Param("code") String code);
 }

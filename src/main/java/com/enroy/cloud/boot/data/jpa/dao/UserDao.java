@@ -10,6 +10,7 @@
 package com.enroy.cloud.boot.data.jpa.dao;
 
 import com.enroy.cloud.boot.data.jpa.api.User;
+import com.enroy.cloud.boot.data.jpa.common.ActionResult;
 import com.enroy.cloud.boot.data.jpa.repository.UserRepository;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
@@ -18,6 +19,7 @@ import org.springframework.stereotype.Component;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.swing.*;
 import java.util.List;
 
 /**
@@ -34,6 +36,17 @@ public class UserDao {
 
   public List<User> findAll() {
     return userRepository.findAll();
+  }
+
+  public ActionResult rename(String uuid, String name) {
+    if (userRepository.rename(uuid, name) > 0) {
+      return ActionResult.OK;
+    }
+    return ActionResult.fail("111");
+  }
+
+  public User findByCode(String code) {
+    return userRepository.findByCode(code);
   }
 
 }

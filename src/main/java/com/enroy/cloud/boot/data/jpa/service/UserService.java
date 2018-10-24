@@ -10,7 +10,9 @@
 package com.enroy.cloud.boot.data.jpa.service;
 
 import com.enroy.cloud.boot.data.jpa.api.User;
+import com.enroy.cloud.boot.data.jpa.common.ActionResult;
 import com.enroy.cloud.boot.data.jpa.dao.UserDao;
+import com.enroy.cloud.boot.data.jpa.transactional.DataJpaNewTx;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,6 +28,15 @@ public class UserService {
 
   public List<User> findAll() {
     return userDao.findAll();
+  }
+
+  @DataJpaNewTx
+  public ActionResult rename(String code, String name) {
+    User user = userDao.findByCode(code);
+    if (user == null) {
+      return ActionResult.fail("指定code的用户不存在");
+    }
+    return userDao.rename(user.getUuid(), name);
   }
 
 }
