@@ -9,7 +9,6 @@
  */
 package com.enroy.cloud.boot.data.jpa.api;
 
-import com.sun.xml.internal.txw2.annotation.XmlElement;
 import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
 
